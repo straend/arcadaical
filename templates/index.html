@@ -1,0 +1,41 @@
+
+<html>
+<head>
+  <title>cal.fik1.net</title>
+</head>
+<body>
+<ol>
+  <li>Get Your Kuranmälningar from <a href="https://asta.arcada.fi/asta" target="_blank">Asta</a></li>
+  <li>Paste ALL OF IT</li>
+  <li> <input type="button" value="can haz" id="btn_can_haz" /></li>
+  <li>PROFIT</li>
+</ol>
+
+<textarea id='asta_ids' rows="20" cols="50" style="width:100%;">
+
+</textarea>
+
+<script>
+    function getcourses(str){
+        var regex=/\w{2}\-\d\-\d{3}( \(\d\))?/gim;
+        var matches = regex.exec(str);
+        var courses = [];
+        while (matches){
+            courses.push(matches[0].replace(" (","_").replace(")",""));
+            matches = regex.exec(str);
+        }
+        return courses;
+    }
+    window.onload = function(){
+        document.getElementById('btn_can_haz').onclick= function(){
+            var courses = getcourses(document.getElementById('asta_ids').value);
+            copyToClipboard(window.location + courses.join('/'));
+        };
+    };
+
+    function copyToClipboard (text) {
+        window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
+    }
+</script>
+</body>
+</html>
